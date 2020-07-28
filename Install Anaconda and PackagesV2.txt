@@ -1,0 +1,54 @@
+﻿Connect to cluster:
+
+t62003uhn@h4huhnlogin1.uhnresearch.ca or @172.27.23.16
+
+Download and Install Anaconda on UHN Cluster
+
+$ wget https://repo.continuum.io/archive/Anaconda3-2020.02-Linux-x86_64.sh
+
+>> Get Anaconda Started
+
+$ bash Anaconda3-2020.02-Linux-x86_64.sh
+
+To start Anaconda: 
+
+$ Conda init
+
+If you'd prefer that conda's base environment not be activated on startup, set the auto_activate_base parameter to false:
+
+$ conda config --set auto_activate_base false
+
+To create an environment:
+
+$ conda create --name myenv
+or
+$ conda create -n myenv python=3.6
+or
+$ conda create -n myenv python=3.6 scipy=0.15.0 astroid babel
+
+To Install Pytorch on Linux
+CUDA version 10.1
+$ conda install pytorch torchvision cudatoolkit=10.1 -c pytorch
+
+
+
+Getting DFUChallenge Started:
+
+>> Run as ipython in the batch script
+
+>> If needed
+$ pip install torchvision
+$ from IPython import get_ipython
+
+>> Add this on terminal
+$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/cluster/home/t62003uhn/anaconda3/lib/
+
+>> If no gpu, 
+	In Efficentdet>lib>train_dataset add
+	self.system_dict["local"]["num_gpus"] = 1; NO NEED TO DO THIS. MAKE SURE Pytorch with Conda and Cuda 9.2 is installed.
+
+	In Efficendet>lib>infer_detector
+	Change img.cuda().permute(2, 0, 1) to img.permute(2, 0, 1)
+
+	In Efficendet>lib>infer_detector
+	Change to self.system_dict['local']['model'] = torch.load(model_dir + '/signatrix_efficientdet_coco.pth', map_location=torch.device('cpu')).module

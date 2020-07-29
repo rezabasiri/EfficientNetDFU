@@ -11,4 +11,4 @@
 #SBATCH -o %x-%j.out
 
 
-ipython /cluster/home/t62003uhn/EfficinetNetDFU/Train_Eval_example.py
+ipython /cluster/home/t62003uhn/EfficinetNetDFU/Train_Eval_example_Jupyther.py

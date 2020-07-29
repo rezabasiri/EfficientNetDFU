@@ -93,11 +93,11 @@ eval_batch_size = 20
 Epoch_Size = 50
 
 # (Image_Size/Batch_Size)*Epoch = Train_Steps
-train_steps = (train_img_size / float(train_batch_size))*float(Epoch_Size)
+train_steps = int((train_img_size / float(train_batch_size))*float(Epoch_Size))
 steps_per_eval = int(train_steps*0.01)
 
 get_ipython().system('mkdir model_dir/')
-get_ipython().system('python main.py --mode=train_and_eval     --data_dir=tfrecord     --model_name={MODEL}     --model_dir=model_dir/{MODEL}-finetune     --train_batch_size={train_batch_size}     --eval_batch_size={eval_batch_size}     --num_eval_images={eval_img_size}     --num_train_images={train_img_size}     --num_label_classes=2     --use_tpu=false     --train_steps={train_steps}     --steps_per_eval={steps_per_eval}     --moving_average_decay=0     --base_learning_rate=0.01     --data_format=channels_first ')
+get_ipython().system('python main.py --mode=train_and_eval     --data_dir=tfrecord     --model_name={MODEL}     --model_dir=model_dir/{MODEL}-finetune     --train_batch_size={train_batch_size}     --eval_batch_size={eval_batch_size}     --num_eval_images={eval_img_size}     --num_train_images={train_img_size}     --num_label_classes=2     --use_tpu=false     --train_steps={train_steps}     --steps_per_eval={steps_per_eval}     --moving_average_decay=0     --base_learning_rate=0.01     ')
 
 
 # In[ ]:
